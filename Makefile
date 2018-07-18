@@ -58,5 +58,11 @@ remote-db-snap:
 	# Also, this can be a bad idea, as there can be conflicts to be solved remotelly. Maybe remote must be read-only
 	CMD="\"cd ${FOLDER} && make db-snap && git add db && git commit -m 'DB snapshot' && git push\"" $(MAKE) remote-cmd
 
+# Write down the basic recipe here and expand it in another moment
+create:
+	wp core download
+	#wp core config --dbname={YOUR DATABASE NAME} --dbuser={YOUR DATABASE USERNAME} --dbpass={YOUR DATABASE PASSWORD}
+	#wp core install --url={YOUR DOMAIN NAME} --title={THE TITLE OF YOUR SITE} --admin_user={YOUR USER NAME} --admin_password={YOUR PASSWORD} --admin_email={YOUR EMAIL}
+
 info:
 	@echo "Remote site URL: ${PROJECT}.${DOMAIN}"
