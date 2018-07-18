@@ -19,14 +19,18 @@ db-snap:
 db-load:
 	PREV_URL=$$($(MAKE) wp-get-siteurl); \
 	${WPCLI} db import ${DB} --allow-root; \
-	CURR_URL=$$($(MAKE) wp-get-siteurl); \
-	if [ "$$PREV_URL" != "$$CURR_URL" ]; then \
-		echo "$$PREV_URL got changed to $$CURR_URL. Changing it back"; \
-		FROM=$$CURR_URL TO=$$PREV_URL $(MAKE) wp-replace-url; \
-		echo "Site URL changed back from $$CURR_URL to $$PREV_URL"; \
+	if [ "$$PREV_URL" == "" ]; then \
+		echo "First DB load. Please adjust the sitename"; \
 	else \
-		echo "Loaded site URL is the same than before ($$PREV_URL). Nothing to do"; \
-	fi;
+		CURR_URL=$$($(MAKE) wp-get-siteurl); \
+		if [ "$$PREV_URL" != "$$CURR_URL" ]; then \
+			echo "$$PREV_URL got changed to $$CURR_URL. Changing it back"; \
+			FROM=$$CURR_URL TO=$$PREV_URL $(MAKE) wp-replace-url; \
+			echo "Site URL changed back from $$CURR_URL to $$PREV_URL"; \
+		else \
+			echo "Loaded site URL is the same than before ($$PREV_URL). Nothing to do"; \
+		fi; \
+	fi
 
 wp-get-siteurl:
 	@${WPCLI} option get siteurl
