@@ -21,6 +21,7 @@ db-load:
 	${WPCLI} db import ${DB} --allow-root; \
 	if [ "$$PREV_URL" == "" ]; then \
 		echo "First DB load. Please adjust the sitename"; \
+		echo "Example: FROM=http://localhost:8080 TO=http://www.solasfs.divspan.net/ make wp-replace-url"; \
 	else \
 		CURR_URL=$$($(MAKE) wp-get-siteurl); \
 		if [ "$$PREV_URL" != "$$CURR_URL" ]; then \
