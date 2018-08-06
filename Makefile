@@ -14,7 +14,7 @@ remote-cmd:
 	ssh ${PROJECT}@${PROJECT}.${DOMAIN} ${CMD}
 
 db-snap:
-	@${WPCLI} db export "db/$(shell date -Iseconds).sql" --allow-root
+	@${WPCLI} db export "db/$(shell php -r "echo date('c');").sql" --allow-root
 
 db-load:
 	PREV_URL=$$($(MAKE) wp-get-siteurl); \
