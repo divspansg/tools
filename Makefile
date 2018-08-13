@@ -3,7 +3,7 @@ DOMAIN=divspan.net
 WPCLI=./wp-cli.phar
 
 # Remote folder. Maybe assume this one to be the same as PROJECT
-FOLDER=[XXX]
+FOLDER=${PROJECT}
 
 MAKEFLAGS += --no-print-directory
 all: dev
@@ -51,17 +51,6 @@ dev:
 
 ssh:
 	ssh ${PROJECT}@${PROJECT}.${DOMAIN}
-
-# Remote git pull; forces the last installed code to be in git
-remote-pull:
-	CMD="\"cd ${FOLDER} && git pull\"" $(MAKE) remote-cmd
-
-# Run after working directly in remote, to get a DB copy on git
-remote-db-snap:
-	# Remote DB snapshot && git commit && git push
-	# TODO fix git push. git doesn't ask for repo's user/passwd when is invoked remotelly
-	# Also, this can be a bad idea, as there can be conflicts to be solved remotelly. Maybe remote must be read-only
-	CMD="\"cd ${FOLDER} && make db-snap && git add db && git commit -m 'DB snapshot' && git push\"" $(MAKE) remote-cmd
 
 # Write down the basic recipe here and expand it in another moment
 create:
