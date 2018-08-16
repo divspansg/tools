@@ -1,5 +1,6 @@
 PROJECT=[XXX]
 DOMAIN=divspan.net
+GIT=divspangit@git.divspan.net
 WPCLI=./wp-cli.phar
 
 # Remote folder. Maybe assume this one to be the same as PROJECT
@@ -51,6 +52,9 @@ dev:
 
 ssh:
 	ssh ${PROJECT}@${PROJECT}.${DOMAIN}
+
+ssh-git:
+	ssh ${GIT}
 
 # Write down the basic recipe here and expand it in another moment
 create:
