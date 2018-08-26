@@ -18,7 +18,7 @@ db-snap:
 	@${WPCLI} db export "db/$(shell php -r "echo date('c');").sql" --allow-root
 
 db-load:
-	PREV_URL=$$($(MAKE) wp-get-siteurl); \
+	@PREV_URL=$$($(MAKE) wp-get-siteurl); \
 	${WPCLI} db import ${DB} --allow-root; \
 	if [ "$$PREV_URL" == "" ]; then \
 		echo "First DB load. Please adjust the sitename"; \
