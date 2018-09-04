@@ -47,6 +47,10 @@ db-latest:
 	echo Loading latest DB snapshot: $$LATESTDB; \
 	DB=$$LATESTDB $(MAKE) db-load
 
+update:
+	git pull
+	$(MAKE) db-latest
+
 dev:
 	php -S localhost:8080
 
