@@ -40,6 +40,11 @@ wp-get-siteurl:
 wp-replace-url:
 	@${WPCLI} search-replace "${FROM}" "${TO}" --all-tables --allow-root
 
+update-dstools:
+	wget https://github.com/divspansg/tools/archive/master.zip -O dstools.zip
+	unzip -j dstools.zip
+	rm dstools.zip
+
 ##########################
 ### Everyday commands:
 db-latest:
